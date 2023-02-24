@@ -2,7 +2,7 @@ spring:
   cloud:
     azure:
       servicebus:
-        name-space: ${SERVICE_BUS_NAME_SPACE}
+        connection-string: ${SERVICE_BUS_CONNECTION_STRING}
     stream:
       function:
         definition: process
