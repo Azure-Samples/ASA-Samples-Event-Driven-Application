@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    azure:
+      servicebus:
+        connection-string: ${SERVICE_BUS_CONNECTION_STRING}
+    stream:
+      function:
+        definition: process
+      bindings:
+        process-in-0:
+          destination: lower-case
+        process-out-0:
+          destination: upper-case
+      servicebus:
+        bindings:
+          process-in-0:
+            consumer:
+              auto-complete: true
+          process-out-0:
+            producer:
+              entity-type: queue
+      poller:
+        fixed-delay: 1000
+        initial-delay: 0
