@@ -351,3 +351,8 @@ MigrationBackup/
 
 .idea
 **/target
+
+# AZD temp folder for local azd and terraform states
+.azure
+infra/.terraform.lock.hcl
+infra/.terraform/
