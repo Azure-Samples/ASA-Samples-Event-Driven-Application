@@ -1,0 +1,12 @@
+name: event-driven-application-asa
+metadata:
+  template: event-driven-application-asa@0.0.1-beta
+services:
+  event-driven:
+    project: ./
+    host: springapp
+    language: java
+    spring:
+      deploymentName: default
+infra:
+  provider: terraform
