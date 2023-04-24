@@ -8,5 +8,5 @@ services:
     language: java
     spring:
       deploymentName: default
-infra:
-  provider: terraform
+#infra:
+#  provider: terraform
