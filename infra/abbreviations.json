@@ -113,6 +113,7 @@
   "serviceEndPointPolicies": "se-",
   "serviceFabricClusters": "sf-",
   "signalRServiceSignalR": "sigr",
+  "springApps": "asa-",
   "sqlManagedInstances": "sqlmi-",
   "sqlServers": "sql-",
   "sqlServersDataWarehouse": "sqldw-",
