@@ -4,6 +4,8 @@ param appName string
 param tags object = {}
 param relativePath string
 param keyVaultName string
+param appInsightName string
+param laWorkspaceResourceId string
 
 resource asaInstance 'Microsoft.AppPlatform/Spring@2022-12-01' = {
   name: asaInstanceName
@@ -47,6 +49,37 @@ resource asaDeployment 'Microsoft.AppPlatform/Spring/apps/deployments@2022-12-01
 	  }
     }
   }
+}
+
+resource springAppsMonitoringSettings 'Microsoft.AppPlatform/Spring/monitoringSettings@2023-03-01-preview' = {
+  name: 'default' // The only supported value is 'default'
+  parent: asaInstance
+  properties: {
+    traceEnabled: true
+    appInsightsInstrumentationKey: applicationInsights.properties.InstrumentationKey
+  }
+}
+
+resource springAppsDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+  name: 'monitoring'
+  scope: asaInstance
+  properties: {
+    workspaceId: laWorkspaceResourceId
+    logs: [
+      {
+        category: 'ApplicationConsole'
+        enabled: true
+        retentionPolicy: {
+          days: 30
+          enabled: false
+        }
+      }
+    ]
+  }
+}
+
+resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing = if (!(empty(appInsightName))) {
+  name: appInsightName
 }
 
 resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = if (!(empty(keyVaultName))) {

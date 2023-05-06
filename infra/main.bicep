@@ -15,6 +15,10 @@ param principalId string = ''
 @description('Relative Path of ASA Jar')
 param relativePath string
 
+param logAnalyticsName string = ''
+param applicationInsightsName string = ''
+param applicationInsightsDashboardName string = ''
+
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var keyVaultName = '${abbrs.keyVaultVaults}${resourceToken}'
@@ -68,6 +72,8 @@ module springApps 'modules/springapps/springapps.bicep' = {
     asaInstanceName: asaInstanceName
     relativePath: relativePath
     keyVaultName: keyVault.outputs.name
+    appInsightName: monitoring.outputs.applicationInsightsName
+    laWorkspaceResourceId: monitoring.outputs.logAnalyticsWorkspaceId
   }
 }
 
@@ -77,6 +83,19 @@ module apiKeyVaultAccess './modules/keyvault/keyvault-access.bicep' = {
   params: {
     keyVaultName: keyVault.outputs.name
     principalId: springApps.outputs.identityPrincipalId
+  }
+}
+
+// Monitor application with Azure Monitor
+module monitoring './modules/monitor/monitoring.bicep' = {
+  name: 'monitoring'
+  scope: resourceGroup(rg.name)
+  params: {
+    location: location
+    tags: tags
+    logAnalyticsName: !empty(logAnalyticsName) ? logAnalyticsName : '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
+    applicationInsightsName: !empty(applicationInsightsName) ? applicationInsightsName : '${abbrs.insightsComponents}${resourceToken}'
+    applicationInsightsDashboardName: !empty(applicationInsightsDashboardName) ? applicationInsightsDashboardName : '${abbrs.portalDashboards}${resourceToken}'
   }
 }
 
