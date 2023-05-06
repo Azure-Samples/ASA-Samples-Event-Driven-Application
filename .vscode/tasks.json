@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Event Driven",
+      "type": "dotenv",
+      "targetTasks": "mvn spring-boot:run",
+      "file": "${input:dotEnvFilePath}"
+    },
+    {
+      "label": "mvn spring-boot:run",
+      "detail": "Helper task--use 'Start Event Driven' task to ensure environment is set up correctly",
+      "type": "shell",
+      "command": "./mvnw spring-boot:run",
+      "options": {
+        "cwd": "${workspaceFolder}/"
+      },
+      "presentation": {
+        "panel": "dedicated",
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Event Driven",
+      "command": "./mvnw",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/"
+      },
+      "args": [
+        "package",
+        "-DskipTests"
+      ],
+      "problemMatcher": []
+    }
+  ],
+
+  "inputs": [
+    {
+      "id": "dotEnvFilePath",
+      "type": "command",
+      "command": "azure-dev.commands.getDotEnvFilePath"
+    }
+  ]
+}
