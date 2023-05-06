@@ -5,7 +5,7 @@
       "name": "Debug Event Driven",
       "type": "java",
       "request": "launch",
-      "preLaunchTask": "Build API",
+      "preLaunchTask": "Build Event Driven",
       "mainClass": "com.microsoft.azure.spring.apps.sample.event.driven.SampleEventDrivenApplication",
       "args": [],
       "cwd": "${workspaceFolder}/",
