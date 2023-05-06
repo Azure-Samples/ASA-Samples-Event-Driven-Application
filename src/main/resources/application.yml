@@ -27,3 +27,13 @@ spring:
       poller:
         fixed-delay: 1000
         initial-delay: 0
+management:
+  health:
+    binders:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - bindings
+          - "*"
