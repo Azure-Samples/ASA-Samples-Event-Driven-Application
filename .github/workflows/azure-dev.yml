@@ -47,6 +47,9 @@ jobs:
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Set Springapp on
+        run: azd config set alpha.springapp on
+
       - name: Azure Dev Provision
         run: azd provision --no-prompt
         env:
