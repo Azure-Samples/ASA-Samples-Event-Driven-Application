@@ -127,25 +127,6 @@ The repo is structured to follow the [Azure Developer CLI](https://aka.ms/azure-
 
 This template will create infrastructure and deploy code to Azure. If you don't have an Azure Subscription, you can sign up for a [free account here](https://azure.microsoft.com/free/). Make sure you have contributor role to the Azure subscription.
 
-### Azure Developer CLI - VS Code Extension
-
-The Azure Developer experience includes an Azure Developer CLI VS Code Extension that mirrors all of the Azure Developer CLI commands into the `azure.yaml` context menu and command palette options. If you are a VS Code user, then we highly recommend installing this extension for the best experience.
-
-Here's how to install it:
-
-#### VS Code
-
-1. Click on the "Extensions" tab in VS Code
-1. Search for "Azure Developer CLI" - authored by Microsoft
-1. Click "Install"
-
-#### Marketplace
-
-1. Go to the [Azure Developer CLI - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.azure-dev) page
-1. Click "Install"
-
-Once the extension is installed, you can press `F1`, and type "Azure Developer CLI" to see all of your available options. You can also right click on your project's `azure.yaml` file for a list of commands.
-
 ### Next Steps
 
 At this point, you have a complete application deployed on Azure. But there is much more that the Azure Developer CLI can do. These next steps will introduce you to additional commands that will make creating applications on Azure much easier. Using the Azure Developer CLI, you can setup your pipelines, monitor your application, test and debug locally.
