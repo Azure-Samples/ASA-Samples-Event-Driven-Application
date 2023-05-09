@@ -20,9 +20,6 @@ description: A complete event-driven application that includes everything you ne
 
 # Event Driven Application with Azure Service Bus on Azure Spring Apps
 
-
-[![Open in Remote - Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Remote%20-%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/ASA-Samples-Event-Driven-Application)
-
 A complete event-driven application that includes everything you need to build, deploy, and monitor an Azure solution. This application uses the Azure Developer CLI (azd) to get you up and running on Azure quickly, Java for the application, Azure Service Bus for the message queue, Azure Key Vault for storing application secrets and Azure Monitor for monitoring and logging. It includes application code, tools, and pipelines that serve as a foundation from which you can build upon and customize when creating your own solutions.
 
 Let's jump in and get the event-driven app up and running in Azure. When you are finished, you will have a fully functional event driven app deployed on Azure. In later steps, you'll see how to setup a pipeline and monitor the application.
