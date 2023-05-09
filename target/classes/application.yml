@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          property-sources[0]:
+            enabled: true
+            endpoint: ${AZURE_KEY_VAULT_ENDPOINT}
+      servicebus:
+        connection-string: ${SERVICE-BUS-CONNECTION-STRING}
+    stream:
+      function:
+        definition: process
+      bindings:
+        process-in-0:
+          destination: lower-case
+        process-out-0:
+          destination: upper-case
+      servicebus:
+        bindings:
+          process-in-0:
+            consumer:
+              auto-complete: true
+          process-out-0:
+            producer:
+              entity-type: queue
+      poller:
+        fixed-delay: 1000
+        initial-delay: 0
+management:
+  health:
+    binders:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - bindings
+          - "*"
