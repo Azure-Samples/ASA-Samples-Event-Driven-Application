@@ -36,7 +36,13 @@ The following prerequisites are required to use this application. Please ensure 
 The fastest way for you to get this application up and running on Azure is to use the `azd up` command. This single command will create and configure all necessary Azure resources - including access policies and roles for your account and service-to-service communication with Managed Identities.
 
 1. Open a terminal, create a new empty folder, and change into it.
-2. Run the following command to initialize the project.
+2. Run the following command to enable Azure Spring Apps feature for AZD.
+
+```bash
+azd config set alpha.springapp on
+```
+
+3. Run the following command to initialize the project.
 
 ```bash
 azd init --template https://github.com/Azure-Samples/ASA-Samples-Event-Driven-Application/
@@ -46,7 +52,7 @@ This command will clone the code to your current folder and prompt you for the f
 
 - `Environment Name`: This will be used as a prefix for the resource group that will be created to hold all Azure resources. This name should be unique within your Azure subscription.
 
-3. Run the following command to package a deployable copy of your application, provision the template's infrastructure to Azure and also deploy the application code to those newly provisioned resources.
+4. Run the following command to package a deployable copy of your application, provision the template's infrastructure to Azure and also deploy the application code to those newly provisioned resources.
 
 ```bash
 azd up
