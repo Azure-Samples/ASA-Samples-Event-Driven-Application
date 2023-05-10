@@ -20,9 +20,6 @@ description: A complete event-driven application that includes everything you ne
 
 # Event Driven Application with Azure Service Bus on Azure Spring Apps
 
-
-[![Open in Remote - Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Remote%20-%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/ASA-Samples-Event-Driven-Application)
-
 A complete event-driven application that includes everything you need to build, deploy, and monitor an Azure solution. This application uses the Azure Developer CLI (azd) to get you up and running on Azure quickly, Java for the application, Azure Service Bus for the message queue, Azure Key Vault for storing application secrets and Azure Monitor for monitoring and logging. It includes application code, tools, and pipelines that serve as a foundation from which you can build upon and customize when creating your own solutions.
 
 Let's jump in and get the event-driven app up and running in Azure. When you are finished, you will have a fully functional event driven app deployed on Azure. In later steps, you'll see how to setup a pipeline and monitor the application.
@@ -39,7 +36,13 @@ The following prerequisites are required to use this application. Please ensure 
 The fastest way for you to get this application up and running on Azure is to use the `azd up` command. This single command will create and configure all necessary Azure resources - including access policies and roles for your account and service-to-service communication with Managed Identities.
 
 1. Open a terminal, create a new empty folder, and change into it.
-2. Run the following command to initialize the project.
+2. Run the following command to enable Azure Spring Apps feature for AZD.
+
+```bash
+azd config set alpha.springapp on
+```
+
+3. Run the following command to initialize the project.
 
 ```bash
 azd init --template https://github.com/Azure-Samples/ASA-Samples-Event-Driven-Application/
@@ -49,7 +52,7 @@ This command will clone the code to your current folder and prompt you for the f
 
 - `Environment Name`: This will be used as a prefix for the resource group that will be created to hold all Azure resources. This name should be unique within your Azure subscription.
 
-3. Run the following command to package a deployable copy of your application, provision the template's infrastructure to Azure and also deploy the application code to those newly provisioned resources.
+4. Run the following command to package a deployable copy of your application, provision the template's infrastructure to Azure and also deploy the application code to those newly provisioned resources.
 
 ```bash
 azd up
