@@ -18,9 +18,10 @@ param relativePath string
 param logAnalyticsName string = ''
 param applicationInsightsName string = ''
 param applicationInsightsDashboardName string = ''
+param utcValue string = utcNow()
 
 var abbrs = loadJsonContent('./abbreviations.json')
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, utcValue))
 var keyVaultName = '${abbrs.keyVaultVaults}${resourceToken}'
 var serviceBusNamespaceName = '${environmentName}-${abbrs.serviceBusNamespaces}${resourceToken}'
 var asaInstanceName = '${environmentName}-${abbrs.springApps}${resourceToken}'
