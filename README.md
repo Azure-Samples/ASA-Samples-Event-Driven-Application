@@ -23,9 +23,9 @@ description: A complete event-driven application that includes everything you ne
 [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=605391801&machine=standardLinux32gb&devcontainer_path=.devcontainer%2Fdevcontainer.json&location=WestUs2)
 [![Open in Remote - Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Remote%20-%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/ASA-Samples-Event-Driven-Application)
 
-A complete event-driven application that includes everything you need to build, deploy, and monitor an Azure solution. This application uses the Azure Developer CLI (azd) to get you up and running on Azure quickly, Java for the application, Azure Service Bus for the message queue, Azure Key Vault for storing application secrets and Azure Monitor for monitoring and logging. It includes application code, tools, and pipelines that serve as a foundation from which you can build upon and customize when creating your own solutions.
+A complete event-driven application that includes everything you need to build and deploy, and monitor an Azure solution. This application uses the Azure Developer CLI (azd) to get you up and running on Azure quickly, Java for the application, Azure Service Bus for the message queue, Azure Key Vault for storing application secrets and Azure Monitor for monitoring and logging. It includes application code, tools, and pipelines that serve as a foundation from which you can build upon and customize when creating your own solutions.
 
-Let's jump in and get the event-driven app up and running in Azure. When you are finished, you will have a fully functional event driven app deployed on Azure. In later steps, you'll see how to setup a pipeline and monitor the application.
+Let's jump in and get the event-driven app up and running in Azure. When you are finished, you will have a fully functional event driven app deployed on Azure. In later steps, you'll see how to setup a pipeline and run the application.
 
 ### Prerequisites
 
@@ -97,7 +97,7 @@ When `azd up` is complete it will output the following URLs:
 
 !["azd up output"](assets/urls.png)
 
-Click the Azure Portal URL and find your Service Bus. Use the [Service Bus Explorer](https://learn.microsoft.com/azure/service-bus-messaging/explorer#send-a-message-to-a-queue-or-topic) to send messages to the `lower-case` queue, and navigate to the `upper-case` queue to check that there's a new message. This will create monitoring activity in the application that you will be able to see later when you run `azd monitor`.
+Click the Azure Portal URL and find your Service Bus. Use the [Service Bus Explorer](https://learn.microsoft.com/azure/service-bus-messaging/explorer#send-a-message-to-a-queue-or-topic) to send messages to the `lower-case` queue, and navigate to the `upper-case` queue to check that there's a new message.
 
 > NOTE:
 >
@@ -136,7 +136,7 @@ This template will create infrastructure and deploy code to Azure. If you don't 
 
 ### Next Steps
 
-At this point, you have a complete application deployed on Azure. But there is much more that the Azure Developer CLI can do. These next steps will introduce you to additional commands that will make creating applications on Azure much easier. Using the Azure Developer CLI, you can setup your pipelines and monitor your application.
+At this point, you have a complete application deployed on Azure. But there is much more that the Azure Developer CLI can do. These next steps will introduce you to additional commands that will make creating applications on Azure much easier. Using the Azure Developer CLI, you can setup your pipelines and run your application.
 
 #### Set up a pipeline using `azd pipeline`
 
@@ -152,31 +152,6 @@ azd pipeline config
 
 > Support for Azure DevOps Pipelines is coming soon to `azd pipeline config`. In the meantime, you can follow the instructions found here: [.azdo/pipelines/README.md](./.azdo/pipelines/README.md) to set it up manually.
 
-#### Monitor the application using `azd monitor`
-
-To help with monitoring applications, the Azure Dev CLI provides a `monitor` command to help you get to the various Application Insights dashboards.
-
-- Run the following command to open the "Overview" dashboard:
-
-  ```bash
-  azd monitor --overview
-  ```
-
-- Live Metrics Dashboard
-
-  Run the following command to open the "Live Metrics" dashboard:
-
-  ```bash
-  azd monitor --live
-  ```
-
-- Logs Dashboard
-
-  Run the following command to open the "Logs" dashboard:
-
-  ```bash
-  azd monitor --logs
-  ```
 
 #### Clean up resources
 
