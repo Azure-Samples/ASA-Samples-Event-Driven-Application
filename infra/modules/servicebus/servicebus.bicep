@@ -1,8 +1,6 @@
 param serviceBusNamespaceName string
 param location string
 param tags object = {}
-param keyVaultName string
-param secretName string
 param subscriptionId string
 param resourceGroupName string
 
@@ -53,11 +51,6 @@ resource serviceBusQueue_02 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-p
   }
 }
 
-module serviceBusConnectionStringSecret '../keyvault/keyvault-secret.bicep' = {
-  name: 'service-bus-cs-secret'
-  params: {
-  	keyVaultName: keyVaultName
-    secretName: secretName
-    secretValue: listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
-  }
-}
+output serviceBusNamespaceId string = serviceBusNamespace.id
+output serviceBusNamespaceApiVersion string = serviceBusNamespace.apiVersion
+output SERVICE_BUS_CONNECTION_STRING string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString

@@ -1,13 +1,8 @@
 spring:
   cloud:
     azure:
-      keyvault:
-        secret:
-          property-sources[0]:
-            enabled: true
-            endpoint: ${AZURE_KEY_VAULT_ENDPOINT}
       servicebus:
-        connection-string: ${SERVICE-BUS-CONNECTION-STRING}
+        connection-string: ${SERVICE_BUS_CONNECTION_STRING}
     stream:
       function:
         definition: process
@@ -28,6 +23,10 @@ spring:
         fixed-delay: 1000
         initial-delay: 0
 management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
   health:
     binders:
       enabled: true
