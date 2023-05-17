@@ -48,7 +48,7 @@ azd config set alpha.springapp on
 3. Run the following command to initialize the project.
 
 ```bash
-azd init --template https://github.com/Azure-Samples/ASA-Samples-Event-Driven-Application/
+azd init -t ASA-Samples-Event-Driven-Application -b consumption-plan
 ```
 
 This command will clone the code to your current folder and prompt you for the following information:
