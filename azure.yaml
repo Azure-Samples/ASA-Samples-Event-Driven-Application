@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/alpha/azure.yaml.json
 
-name: event-driven-application-asa
+name: asa-samples-event-driven-application
 metadata:
-  template: event-driven-application-asa@0.0.1-beta
+  template: asa-samples-event-driven-application@0.0.1-beta
 services:
   simple-event-driven-app:
     project: ./
