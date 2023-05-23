@@ -36,74 +36,26 @@ The following prerequisites are required to use this application. Please ensure 
 
 ### Quickstart
 
-The fastest way for you to get this application up and running on Azure is to use the `azd up` command. This single command will create and configure all necessary Azure resources - including access policies and roles for your account and service-to-service communication with Managed Identities.
+To learn how to get started with any template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-python) with this template(`Azure-Samples/todo-python-mongo`).
 
-1. Open a terminal, create a new empty folder, and change into it.
-2. Run the following command to enable Azure Spring Apps feature for AZD.
+This quickstart will show you how to authenticate on Azure, initialize using a template, provision infrastructure and deploy code on Azure via the following commands:
 
 ```bash
+# Log in to azd. Only required once per-install.
+azd auth login
+
+# Enable Azure Spring Apps feature for AZD
 azd config set alpha.springapp on
-```
 
-3. Run the following command to initialize the project.
+# First-time project setup. Initialize a project in the current directory, using this template. 
+azd init --template Azure-Samples/todo-csharp-cosmos-sql
 
-```bash
-azd init --template https://github.com/Azure-Samples/ASA-Samples-Event-Driven-Application/
-```
-
-This command will clone the code to your current folder and prompt you for the following information:
-
-- `Environment Name`: This will be used as a prefix for the resource group that will be created to hold all Azure resources. This name should be unique within your Azure subscription.
-
-4. Run the following command to package a deployable copy of your application, provision the template's infrastructure to Azure and also deploy the application code to those newly provisioned resources.
-
-```bash
+# Provision and deploy to Azure
 azd up
 ```
 
-This command will prompt you for the following information:
+Open Azure Portal and find your Service Bus. Use the [Service Bus Explorer](https://learn.microsoft.com/azure/service-bus-messaging/explorer#send-a-message-to-a-queue-or-topic) to send messages to the `lower-case` queue, and navigate to the `upper-case` queue to check that there's a new message.
 
-- `Azure Location`: The Azure location where your resources will be deployed.
-
-> NOTE: This template may only be used with the following Azure locations:
->
-> - Australia East
-> - Brazil South
-> - Canada Central
-> - Central US
-> - East Asia
-> - East US
-> - East US 2
-> - Germany West Central
-> - Japan East
-> - Korea Central
-> - North Central US
-> - North Europe
-> - South Central US
-> - UK South
-> - West Europe
-> - West US
->
-> If you attempt to use the template with an unsupported region, the provision step will fail.
-
-- `Azure Subscription`: The Azure Subscription where your resources will be deployed.
-
-> NOTE: This may take a while to complete as it executes three commands: `azd package` (packages a deployable copy of your application), `azd provision` (provisions Azure resources), and `azd deploy` (deploys application code). You will see a progress indicator as it packages, provisions and deploys your application.
-
-When `azd up` is complete it will output the following URLs:
-
-- Azure Portal link to view resources
-- Event Driven application
-
-!["azd up output"](assets/urls.png)
-
-Click the Azure Portal URL and find your Service Bus. Use the [Service Bus Explorer](https://learn.microsoft.com/azure/service-bus-messaging/explorer#send-a-message-to-a-queue-or-topic) to send messages to the `lower-case` queue, and navigate to the `upper-case` queue to check that there's a new message.
-
-> NOTE:
->
-> - The `azd up` command will create Azure resources that will incur costs to your Azure subscription. You can clean up those resources manually via the Azure portal or with the `azd down` command.
-> - You can call `azd up` as many times as you like to both provision and deploy your solution.
-> - You can always create a new environment with `azd env new`.
 
 ### Application Architecture
 
