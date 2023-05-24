@@ -48,7 +48,7 @@ azd auth login
 azd config set alpha.springapp on
 
 # First-time project setup. Initialize a project in the current directory, using this template. 
-azd init --template Azure-Samples/todo-csharp-cosmos-sql
+azd init --template Azure-Samples/ASA-Samples-Event-Driven-Application
 
 # Provision and deploy to Azure
 azd up
