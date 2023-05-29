@@ -25,7 +25,6 @@ resource asaApp 'Microsoft.AppPlatform/Spring/apps@2022-12-01' = {
 	type: 'SystemAssigned'
   }
   properties: {
-    public: true
     activeDeploymentName: 'default'
   }
 }
@@ -88,4 +87,3 @@ resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = if (!(empty(
 
 output identityPrincipalId string = asaApp.identity.principalId
 output name string = asaApp.name
-output uri string = 'https://${asaApp.properties.url}'
