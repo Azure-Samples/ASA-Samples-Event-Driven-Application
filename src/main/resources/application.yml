@@ -4,7 +4,7 @@ spring:
       keyvault:
         secret:
           property-sources[0]:
-            enabled: true
+            enabled: false
             endpoint: ${AZURE_KEY_VAULT_ENDPOINT}
       servicebus:
         connection-string: ${SERVICE-BUS-CONNECTION-STRING}
@@ -37,3 +37,10 @@ management:
         include:
           - bindings
           - "*"
+logging:
+  level:
+    com:
+      azure:
+        core:
+          amqp: WARN
+        messaging: WARN
