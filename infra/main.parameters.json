@@ -13,6 +13,9 @@
     },
     "relativePath": {
       "value": "${SERVICE_SIMPLE_EVENT_DRIVEN_APP_RELATIVE_PATH=<default>}"
+    },
+    "plan": {
+      "value": "${PLAN=consumption}"
     }
   }
 }

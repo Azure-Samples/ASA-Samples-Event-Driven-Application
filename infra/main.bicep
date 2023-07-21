@@ -9,6 +9,12 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+@allowed([
+  'consumption'
+  'standard'
+])
+param plan string = 'consumption'
+
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
@@ -21,11 +27,10 @@ param applicationInsightsDashboardName string = ''
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
-var keyVaultName = '${abbrs.keyVaultVaults}${resourceToken}'
 var serviceBusNamespaceName = '${abbrs.serviceBusNamespaces}${resourceToken}'
+var asaManagedEnvironmentName = '${abbrs.appContainerAppsManagedEnvironment}${resourceToken}'
 var asaInstanceName = '${abbrs.springApps}${resourceToken}'
 var appName = 'simple-event-driven-app'
-var serviceBusConnectionStringSecretName = 'SERVICE-BUS-CONNECTION-STRING'
 var tags = {
   'azd-env-name': environmentName
   'spring-cloud-azure': 'true'
@@ -37,17 +42,6 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   tags: tags
 }
 
-module keyVault 'modules/keyvault/keyvault.bicep' = {
-  name: '${deployment().name}--kv'
-  scope: resourceGroup(rg.name)
-  params: {
-  	keyVaultName: keyVaultName
-  	location: location
-	tags: tags
-	principalId: principalId
-  }
-}
-
 module serviceBus 'modules/servicebus/servicebus.bicep' = {
   name: '${deployment().name}--sb'
   scope: resourceGroup(rg.name)
@@ -55,35 +49,48 @@ module serviceBus 'modules/servicebus/servicebus.bicep' = {
     serviceBusNamespaceName: serviceBusNamespaceName
     location: location
     tags: tags
-    keyVaultName: keyVault.outputs.name
-    secretName: serviceBusConnectionStringSecretName
-    subscriptionId: subscription().id
-    resourceGroupName: rg.name
   }
 }
 
-module springApps 'modules/springapps/springapps.bicep' = {
-  name: '${deployment().name}--asa'
+module springAppsConsumption 'modules/springapps/springappsConsumption.bicep' = if (plan == 'consumption') {
+  name: '${deployment().name}--asaconsumption'
+  scope: resourceGroup(rg.name)
+  params: {
+    location: location
+	appName: appName
+	tags: tags
+	asaManagedEnvironmentName: asaManagedEnvironmentName
+	asaInstanceName: asaInstanceName
+	relativePath: relativePath
+	appInsightName: monitoring.outputs.applicationInsightsName
+	logAnalyticsName: monitoring.outputs.logAnalyticsWorkspaceName
+	environmentVariables: {
+	  SERVICE_BUS_CONNECTION_STRING: serviceBus.outputs.SERVICE_BUS_CONNECTION_STRING
+	}
+  }
+  dependsOn: [
+    serviceBus
+  ]
+}
+
+module springAppsStandard 'modules/springapps/springappsStandard.bicep' = if (plan == 'standard') {
+  name: '${deployment().name}--asastandard'
   scope: resourceGroup(rg.name)
   params: {
     location: location
     appName: appName
-    tags: union(tags, { 'azd-service-name': appName })
+    tags: tags
     asaInstanceName: asaInstanceName
     relativePath: relativePath
-    keyVaultName: keyVault.outputs.name
     appInsightName: monitoring.outputs.applicationInsightsName
     laWorkspaceResourceId: monitoring.outputs.logAnalyticsWorkspaceId
+    environmentVariables: {
+	  SERVICE_BUS_CONNECTION_STRING: serviceBus.outputs.SERVICE_BUS_CONNECTION_STRING
+	}
   }
-}
-
-module apiKeyVaultAccess './modules/keyvault/keyvault-access.bicep' = {
-  name: 'api-keyvault-access'
-  scope: resourceGroup(rg.name)
-  params: {
-    keyVaultName: keyVault.outputs.name
-    principalId: springApps.outputs.identityPrincipalId
-  }
+  dependsOn: [
+    serviceBus
+  ]
 }
 
 // Monitor application with Azure Monitor
@@ -98,6 +105,3 @@ module monitoring './modules/monitor/monitoring.bicep' = {
     applicationInsightsDashboardName: !empty(applicationInsightsDashboardName) ? applicationInsightsDashboardName : '${abbrs.portalDashboards}${resourceToken}'
   }
 }
-
-output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
-output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
