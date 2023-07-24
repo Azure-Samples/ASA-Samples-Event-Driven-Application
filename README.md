@@ -44,9 +44,6 @@ This quickstart will show you how to authenticate on Azure, initialize using a t
 # Log in to azd. Only required once per-install.
 azd auth login
 
-# Enable Azure Spring Apps feature for AZD
-azd config set alpha.springapp on
-
 # First-time project setup. Initialize a project in the current directory, using this template. 
 azd init --template Azure-Samples/ASA-Samples-Event-Driven-Application
 
