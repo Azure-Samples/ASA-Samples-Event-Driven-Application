@@ -3,17 +3,17 @@ param asaInstanceName string
 param appName string
 param tags object = {}
 param relativePath string
-param keyVaultName string
 param appInsightName string
 param laWorkspaceResourceId string
+param environmentVariables object = {}
 
 resource asaInstance 'Microsoft.AppPlatform/Spring@2022-12-01' = {
   name: asaInstanceName
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': appName })
   sku: {
-    name: 'B0'
-    tier: 'Basic'
+    name: 'S0'
+    tier: 'Standard'
   }
 }
 
@@ -21,11 +21,7 @@ resource asaApp 'Microsoft.AppPlatform/Spring/apps@2022-12-01' = {
   name: appName
   location: location
   parent: asaInstance
-  identity: {
-	type: 'SystemAssigned'
-  }
   properties: {
-    activeDeploymentName: 'default'
   }
 }
 
@@ -40,12 +36,10 @@ resource asaDeployment 'Microsoft.AppPlatform/Spring/apps/deployments@2022-12-01
     }
     deploymentSettings: {
       resourceRequests: {
-        cpu: '1'
-        memory: '2Gi'
+        cpu: '2'
+        memory: '4Gi'
       }
-      environmentVariables: {
-	    AZURE_KEY_VAULT_ENDPOINT: keyVault.properties.vaultUri
-	  }
+      environmentVariables: environmentVariables
     }
   }
 }
@@ -81,9 +75,4 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing
   name: appInsightName
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = if (!(empty(keyVaultName))) {
-  name: keyVaultName
-}
-
-output identityPrincipalId string = asaApp.identity.principalId
 output name string = asaApp.name
