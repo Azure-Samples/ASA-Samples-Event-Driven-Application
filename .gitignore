@@ -34,3 +34,4 @@ out/
 /.nb-gradle/
 
 .azure
+target/
