@@ -31,7 +31,7 @@ jobs:
           distribution: 'microsoft'
           java-version: '17'
       -  run: |
-          chmod +x ${GITHUB_WORKSPACE}/src/api/mvnw        
+          chmod +x ${GITHUB_WORKSPACE}/mvnw        
 
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
