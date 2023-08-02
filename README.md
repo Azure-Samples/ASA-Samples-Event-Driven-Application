@@ -31,8 +31,13 @@ Let's jump in and get the event-driven app up and running in Azure. When you are
 
 The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
 
-- [Azure Developer CLI](https://aka.ms/azd-install)
+- [Azure Developer CLI 1.2.0 or later](https://aka.ms/azd-install)
 - [Java 17 or later](https://learn.microsoft.com/en-us/java/openjdk/install)
+
+If you are using Azure Developer CLI with the version lower than 1.2.0, then you will need to enable the feature for Azure Spring Apps support manually by the following command:
+```bash
+azd config set alpha.springapp on
+```
 
 ### Quickstart
 
@@ -43,9 +48,6 @@ This quickstart will show you how to authenticate on Azure, initialize using a t
 ```bash
 # Log in to azd. Only required once per-install.
 azd auth login
-
-# Enable Azure Spring Apps feature for AZD
-azd config set alpha.springapp on
 
 # First-time project setup. Initialize a project in the current directory, using this template. 
 azd init --template Azure-Samples/ASA-Samples-Event-Driven-Application
