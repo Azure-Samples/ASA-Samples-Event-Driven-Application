@@ -2,7 +2,7 @@ spring:
   cloud:
     azure:
       servicebus:
-        connection-string: ${SERVICE-BUS-CONNECTION-STRING}
+        connection-string: ${SERVICE_BUS_CONNECTION_STRING}
     stream:
       function:
         definition: process
