@@ -351,11 +351,11 @@
           "outputs": {
             "id": {
               "type": "string",
-              "value": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('name'))]"
+              "value": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
             },
             "name": {
               "type": "string",
-              "value": "[parameters('name')]"
+              "value": "[parameters('logAnalyticsName')]"
             }
           }
         }
@@ -384,7 +384,7 @@
             "value": "[parameters('tags')]"
           },
           "logAnalyticsWorkspaceId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', parameters('logAnalyticsName')), '2022-09-01').outputs.id.value]"
+            "value": "/subscriptions/6c933f90-8115-4392-90f2-7077c9fa5dbd/resourceGroups/rg-moary-ed/providers/Microsoft.OperationalInsights/workspaces/workspace-rgmoaryedSd95"
           }
         },
         "template": {
