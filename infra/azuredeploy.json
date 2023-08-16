@@ -495,7 +495,10 @@
             }
           }
         }
-      }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', parameters('logAnalyticsName'))]"
+      ]
     },
     {
       "condition": "[equals(parameters('plan'), 'consumption')]",
