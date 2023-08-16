@@ -421,7 +421,10 @@
               "properties": {
                 "Application_Type": "other",
                 "WorkspaceResourceId": "[parameters('logAnalyticsWorkspaceId')]"
-              }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', parameters('logAnalyticsName'))]"
+              ]
             },
             {
               "type": "Microsoft.Resources/deployments",
@@ -493,10 +496,7 @@
             }
           }
         }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', parameters('logAnalyticsName'))]"
-      ]
+      }
     }
   ]
 }
