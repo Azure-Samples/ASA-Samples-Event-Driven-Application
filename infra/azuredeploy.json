@@ -422,7 +422,7 @@
                 "WorkspaceResourceId": "[parameters('logAnalyticsWorkspaceId')]"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', parameters('logAnalyticsName'))]"
+                "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
               ]
             },
             {
