@@ -27,6 +27,12 @@ A complete event-driven application that includes everything you need to build a
 
 Let's jump in and get the event-driven app up and running in Azure. When you are finished, you will have a fully functional event driven app deployed on Azure. In later steps, you'll see how to setup a pipeline and run the application.
 
+| Deploy to Azure Spring Apps | |
+|--|--|
+| Consumption plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmoarychan%2FASA-Samples-Event-Driven-Application%2Fmoary%2Fevent-driven%2Fsupport-deploy-to-azure-button%2Finfra%2Fmodules%2Fspringapps%2Fazuredeploy-asa-consumption.json)|
+| Basic/Standard plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmoarychan%2FASA-Samples-Event-Driven-Application%2Fmoary%2Fevent-driven%2Fsupport-deploy-to-azure-button%2Finfra%2Fmodules%2Fspringapps%2Fazuredeploy-asa-standard.json)|
+| Enterprise plan|Not support|
+
 ### Prerequisites
 
 The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
