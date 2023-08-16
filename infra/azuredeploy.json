@@ -384,7 +384,7 @@
             "value": "[parameters('tags')]"
           },
           "logAnalyticsWorkspaceId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'loganalytics'), '2022-09-01').outputs.id.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', parameters('logAnalyticsName')), '2022-09-01').outputs.id.value]"
           }
         },
         "template": {
