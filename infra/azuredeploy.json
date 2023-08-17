@@ -552,7 +552,7 @@
                 }
               },
               "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', [format('{0}--la', deployment().name)])]"
+                "[resourceId('Microsoft.Resources/deployments', format('{0}--la', deployment().name))]"
               ]
             }
           ]
