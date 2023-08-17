@@ -228,10 +228,12 @@
               "type": "string"
             },
             "applicationInsightsName": {
-              "value": "[parameters('applicationInsightsName')]"
+              "type": "string",
+              "defaultValue": "[parameters('applicationInsightsName')]"
             },
             "applicationInsightsDashboardName": {
-              "value": "[parameters('applicationInsightsDashboardName')]"
+              "type": "string",
+              "defaultValue": "[parameters('applicationInsightsDashboardName')]"
             },
             "location": {
               "type": "string",
@@ -341,10 +343,12 @@
                   "contentVersion": "1.0.0.0",
                   "parameters": {
                     "applicationInsightsName": {
-                      "type": "string"
+                      "type": "string",
+                      "defaultValue": "[parameters('applicationInsightsName')]"
                     },
                     "applicationInsightsDashboardName": {
-                      "type": "string"
+                      "type": "string",
+                      "defaultValue": "[parameters('applicationInsightsDashboardName')]"
                     },
                     "location": {
                       "type": "string",
@@ -391,18 +395,20 @@
                             "value": "[parameters('location')]"
                           },
                           "applicationInsightsName": {
-                            "value": "[parameters('name')]"
+                            "value": "[parameters('applicationInsightsName')]"
                           }
                         },
                         "template": {
                           "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
                           "contentVersion": "1.0.0.0",
                           "parameters": {
-                            "applicationInsightsDashboardName": {
-                              "type": "string"
-                            },
                             "applicationInsightsName": {
-                              "type": "string"
+                              "type": "string",
+                              "defaultValue": "[parameters('applicationInsightsName')]"
+                            },
+                            "applicationInsightsDashboardName": {
+                              "type": "string",
+                              "defaultValue": "[parameters('applicationInsightsDashboardName')]"
                             },
                             "location": {
                               "type": "string",
