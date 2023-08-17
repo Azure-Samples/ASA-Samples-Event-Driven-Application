@@ -227,6 +227,12 @@
             "logAnalyticsName": {
               "type": "string"
             },
+            "applicationInsightsName": {
+              "value": "[parameters('applicationInsightsName')]"
+            },
+            "applicationInsightsDashboardName": {
+              "value": "[parameters('applicationInsightsDashboardName')]"
+            },
             "location": {
               "type": "string",
               "defaultValue": "[resourceGroup().location]"
@@ -327,7 +333,7 @@
                     "value": "[parameters('tags')]"
                   },
                   "logAnalyticsWorkspaceId": {
-                    "value": "[reference(resourceId('Microsoft.Resources/deployments', parameters('logAnalyticsName')), '2022-09-01').outputs.id.value]"
+                    "value": "[reference(resourceId('Microsoft.Resources/deployments', format('{0}--la', deployment().name)), '2022-09-01').outputs.id.value]"
                   }
                 },
                 "template": {
