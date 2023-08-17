@@ -328,12 +328,10 @@
               "type": "string"
             },
             "applicationInsightsName": {
-              "type": "string",
-              "defaultValue": "[parameters('applicationInsightsName')]"
+              "type": "string"
             },
             "applicationInsightsDashboardName": {
-              "type": "string",
-              "defaultValue": "[parameters('applicationInsightsDashboardName')]"
+              "type": "string"
             },
             "location": {
               "type": "string",
@@ -362,7 +360,7 @@
                     "value": "[parameters('location')]"
                   },
                   "tags": {
-                    "value": "[variables('tags')]"
+                    "value": "[parameters('tags')]"
                   }
                 },
                 "template": {
@@ -443,12 +441,10 @@
                   "contentVersion": "1.0.0.0",
                   "parameters": {
                     "applicationInsightsName": {
-                      "type": "string",
-                      "defaultValue": "[parameters('applicationInsightsName')]"
+                      "type": "string"
                     },
                     "applicationInsightsDashboardName": {
-                      "type": "string",
-                      "defaultValue": "[parameters('applicationInsightsDashboardName')]"
+                      "type": "string"
                     },
                     "location": {
                       "type": "string",
@@ -481,7 +477,7 @@
                     {
                       "type": "Microsoft.Resources/deployments",
                       "apiVersion": "2022-09-01",
-                      "name": "ai-dashboard",
+                      "name": "[format('{0}--dashboard', deployment().name)]",
                       "properties": {
                         "expressionEvaluationOptions": {
                           "scope": "inner"
@@ -503,12 +499,10 @@
                           "contentVersion": "1.0.0.0",
                           "parameters": {
                             "applicationInsightsName": {
-                              "type": "string",
-                              "defaultValue": "[parameters('applicationInsightsName')]"
+                              "type": "string"
                             },
                             "applicationInsightsDashboardName": {
-                              "type": "string",
-                              "defaultValue": "[parameters('applicationInsightsDashboardName')]"
+                              "type": "string"
                             },
                             "location": {
                               "type": "string",
