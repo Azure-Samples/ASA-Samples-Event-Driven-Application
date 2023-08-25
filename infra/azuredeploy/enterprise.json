@@ -57,8 +57,7 @@
       "name": "[format('{0}/{1}', parameters('asaInstanceName'), 'default')]",
       "properties": {
         "traceEnabled": true,
-        "appInsightsInstrumentationKey": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightName')), '2020-02-02').InstrumentationKey]",
-        "appInsightsSamplingRate": 10
+        "appInsightsInstrumentationKey": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightName')), '2020-02-02').InstrumentationKey]"
       },
       "dependsOn": [
         "[resourceId('Microsoft.AppPlatform/Spring', parameters('asaInstanceName'))]"
@@ -292,8 +291,7 @@
       "apiVersion": "2023-05-01-preview",
       "name": "[concat(parameters('asaInstanceName'), '/default/default/default')]",
       "dependsOn": [
-        "[resourceId('Microsoft.AppPlatform/Spring', parameters('name'))]",
-        "[resourceId('Microsoft.AppPlatform/Spring/apps/deployments', parameters('asaInstanceName'), parameters('appName'), 'default')]"
+        "[resourceId('Microsoft.Resources/deploymentScripts', variables('const_checkingBuilderStateDeploymentName'))]"
       ],
       "properties": {
         "bindingType": "ApplicationInsights",
@@ -303,10 +301,7 @@
             "connection_string": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightName')), '2020-02-02').ConnectionString]"
           }
         }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Resources/deploymentScripts', variables('const_checkingBuilderStateDeploymentName'))]"
-      ]
+      }
     },
     {
       "type": "Microsoft.Resources/deploymentScripts",
@@ -315,8 +310,7 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.AppPlatform/Spring/buildservices/builders/buildpackBindings', parameters('asaInstanceName'), 'default', 'default', 'default')]",
-        "[resourceId('Microsoft.Authorization/roleAssignments', variables('name_roleAssignmentName'))]",
-        "[resourceId('Microsoft.AppPlatform/Spring/apps/deployments', parameters('asaInstanceName'), parameters('appName'), 'default')]"
+        "[resourceId('Microsoft.Authorization/roleAssignments', variables('name_roleAssignmentName'))]"
       ],
       "kind": "AzureCLI",
       "identity": {
