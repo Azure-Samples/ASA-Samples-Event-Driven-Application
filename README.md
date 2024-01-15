@@ -12,7 +12,7 @@ products:
 - azure-monitor
 - azure-pipelines
 - ms-build-openjdk
-urlFragment: event-driven-java-asa
+urlFragment: ASA-Samples-Event-Driven-Application
 name: Event Driven Application with Azure Service Bus on Azure Spring Apps
 description: A complete event-driven application that includes everything you need to build, deploy, and monitor an Azure solution.
 ---
