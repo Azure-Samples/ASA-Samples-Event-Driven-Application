@@ -105,3 +105,5 @@ module monitoring './modules/monitor/monitoring.bicep' = {
     applicationInsightsDashboardName: !empty(applicationInsightsDashboardName) ? applicationInsightsDashboardName : '${abbrs.portalDashboards}${resourceToken}'
   }
 }
+
+output AZURE_RESOURCE_GROUP string = rg.name
